@@ -5,8 +5,13 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { errors } = require('celebrate');
 const userRoute = require('./routes/users');
+const movieRoute = require('./routes/movies');
 const { createUser, login } = require('./controllers/users');
 const auth = require('./middlewares/auth');
+const { requestLogger, errorLogger } = require('./middlewares/logger');
+const { loginValidation, registrValidation } = require('./middlewares/validation');
+
+require('dotenv').config();
 
 const app = express();
 
@@ -25,14 +30,19 @@ mongoose.connect('mongodb://localhost:27017/bitfilmsdb', {
   useUnifiedTopology: true,
 });
 
-app.post('/signup', createUser);
-app.post('/signin', login);
+app.use(requestLogger);
+app.use(errorLogger);
+
+app.post('/signup', registrValidation, createUser);
+app.post('/signin', loginValidation, login);
 
 app.use(auth);
 
 app.use('/users', userRoute);
+app.use('/movies', movieRoute);
 
 app.use(errors());
+
 app.use((err, req, res, next) => {
   res.status(err.statusCode).send({ message: err.message });
   next();
