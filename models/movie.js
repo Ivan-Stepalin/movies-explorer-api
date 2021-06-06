@@ -1,52 +1,52 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 const movieSchema = new mongoose.Schema({
   country: {
     type: String,
-    required: true
+    required: true,
   },
   director: {
     type: String,
-    required: true
+    required: true,
   },
   duration: {
     type: Number,
-    required: true
+    required: true,
   },
   year: {
     type: Date,
-    required: true
+    required: true,
   },
   description: {
     type: String,
-    required: true
+    required: true,
   },
   image: {
     type: String,
     required: true,
     validate: {
       validator(url) {
-        return /(https?):\/\/\w*\S*\./.test(url)
-      }
-    }
+        return /(https?):\/\/\w*\S*\./.test(url);
+      },
+    },
   },
   trailer: {
     type: String,
     required: true,
     validate: {
       validator(url) {
-        return /(https?):\/\/\w*\S*\./.test(url)
-      }
-    }
+        return /(https?):\/\/\w*\S*\./.test(url);
+      },
+    },
   },
   thumbnail: {
     type: String,
     required: true,
     validate: {
       validator(url) {
-        return /(https?):\/\/\w*\S*\./.test(url)
-      }
-    }
+        return /(https?):\/\/\w*\S*\./.test(url);
+      },
+    },
   },
   owner: {
     type: mongoose.Schema.Types.ObjectId,
@@ -60,12 +60,12 @@ const movieSchema = new mongoose.Schema({
   },
   nameRU: {
     type: String,
-    required: true
+    required: true,
   },
   nameEN: {
     type: String,
-    required: true
-  }
-})
+    required: true,
+  },
+});
 
-module.exports = mongoose.model('movie', movieSchema)
+module.exports = mongoose.model('movie', movieSchema);
