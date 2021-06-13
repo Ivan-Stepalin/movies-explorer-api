@@ -1,6 +1,6 @@
 const routes = require('express').Router();
-const { notFound } = require('../controllers/resourceError');
+const { resourceError } = require('../controllers/resourceError');
 
-routes.all('/', notFound);
+routes.all('/', resourceError);
 
 module.exports = routes;
