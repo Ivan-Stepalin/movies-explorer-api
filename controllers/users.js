@@ -63,7 +63,7 @@ module.exports.createUser = (req, res, next) => {
       .send({ data: { _id: user._id, email: user.email, name: user.name } }))
     .catch((err) => {
       if (err.name === 'MongoError' || err.code === 11000) {
-        throw new ConflictError(err.message);
+        throw new ConflictError('Такой пользователь уже существует');
       }
       if (err.name === 'ValidationError') {
         throw new BadRequestError(err.message);
