@@ -9,8 +9,6 @@ const routes = require('./routes/auth');
 const { limiter } = require('./middlewares/rateLimiter');
 const { MONGO_URL, PORT } = require('./config');
 
-require('dotenv').config();
-
 const app = express();
 
 app.use(helmet());
