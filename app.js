@@ -42,4 +42,6 @@ app.use((err, req, res, next) => {
   next();
 });
 
-app.listen(PORT);
+app.listen(PORT, () => {
+  console.log(`App listening on port ${PORT}`);
+});
