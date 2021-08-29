@@ -27,7 +27,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (data) {
         if (req.user._id === data.owner._id.toString()) {
           Movie.findByIdAndRemove(req.params.id)
-            .then((movie) => res.send({ data: movie }));
+            .then((movie) => res.send(movie));
         } else if (req.user._id !== data.owner._id.toString()) {
           throw new ForbiddenError('У вас нет прав удалять чужой фильм');
         }
@@ -74,7 +74,7 @@ module.exports.createMovie = (req, res, next) => {
     owner,
     movieId,
   })
-    .then((movie) => res.status(200).send({ movie }))
+    .then((movie) => res.status(200).send(movie))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         throw new BadRequestError(err.message);
